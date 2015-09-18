@@ -1,0 +1,37 @@
+{% extends '__base__.html' %}
+
+
+{% block titile %}科科一下{% endblock %}
+{% block content %}
+
+<script>
+function onButtonSearch(){
+	var a=document.getElementById("searchKey");
+	var key = a.value;
+    var key1= encodeURI(key) 
+    window.location.href = "search/" + key1;		
+}
+</script>
+
+        <div class="tm-section tm-section-color-1 tm-section-colored">
+
+            <div class="uk-container uk-container-center uk-text-center">
+
+                <img class="tm-logo" src="static/logo_uikit_large.svg" width="281" height="217" >
+
+
+<div class="uk-text-center uk-text-large">
+	<ul id="searchBar" method="get" class="uk-form uk-form-stacked">
+		<input id="searchKey" v-model="key" type="text" maxlength="50" value="{{word}}">                
+		<button type="submit" onClick="onButtonSearch()" class="uk-button uk-button-success uk-button-small"> 科科一下</button>
+	</ul>
+</div>
+
+
+              
+
+              
+            </div>
+  
+</div>
+{% endblock %}

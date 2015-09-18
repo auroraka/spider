@@ -1,0 +1,13 @@
+<script>
+function onButtonSearch(){
+	var a=document.getElementById("searchKey");
+	var keyword = a.value;
+	window.location.href = "search/" + keyword;		
+}
+</script>
+
+
+<ul id="searchBar" method="get" class="uk-form uk-form-stacked">
+	<input id="searchKey" v-model="key" type="text" maxlength="50" value="{{word}}">                
+	<button type="submit" onClick="onButtonSearch()" class="uk-button uk-button-primary uk-button-small"> 科科一下</button>
+</ul>

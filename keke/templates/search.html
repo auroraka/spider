@@ -1,0 +1,120 @@
+{% extends '__base__.html' %}
+
+{% block title %} {{word}}  {% endblock %}
+{% block content %}
+
+<script>
+function onButtonSearch(){
+    var a=document.getElementById("searchKey");
+    var keyword = a.value;
+    key="/search/{{info.where}}/"+ keyword+"/1";
+    key1= encodeURI(key) 
+    window.location.href = key1;     
+}
+function onShowClick(id){
+    var a=document.getElementById("show1"+id);
+    var b=document.getElementById("show2"+id);
+    var c=document.getElementById("hide1"+id);
+    var d=document.getElementById("hide2"+id);
+    a.style.display = 'none';
+    b.style.display = 'none';
+    c.style.display = 'block';
+    d.style.display = 'block';
+}
+function onHideClick(id){
+    var a=document.getElementById("show1"+id);
+    var b=document.getElementById("show2"+id);
+    var c=document.getElementById("hide1"+id);
+    var d=document.getElementById("hide2"+id);
+    a.style.display = 'block';
+    b.style.display = 'block';
+    c.style.display = 'none';
+    d.style.display = 'none';
+}
+
+</script>
+
+
+
+
+<div class="uk-container uk-container-center">
+    <div class="uk-grid">
+        <ul id="searchBar" method="get" class="uk-form uk-form-stacked">
+            <input id="searchKey" v-model="key" type="text" maxlength="50" value="{{word}}">                
+
+    <div class="uk-button-dropdown" data-uk-dropdown>
+        <button class="uk-button">{{info.where}} <i class="uk-icon-caret-down"></i></button>
+        <div class="uk-dropdown">
+            <ul class="uk-nav uk-nav-dropdown">
+                <li class="uk-nav-header">dadfa</li>
+                {% for block in info.myindex %}
+                <li><a href="/search/{{block}}/{{word}}/1">{{block}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+            <button type="submit" onClick="onButtonSearch()" class="uk-button uk-button-primary uk-button-small"> 科科一下</button>
+
+
+        </ul>
+	</div>
+
+    
+
+
+    <div class="uk-width-medium-3-4">
+    <br>
+	{% if pages %}
+		{% for page in pages %}
+            <article class="uk-article">
+               <h2><a href="{{ page.linkPos}}">{{ page.title }}</a></h2>
+                <a href="{{ page.link}}" class="uk-article-meta">{{ page.link}}</a>
+                <div id="show1{{page.id}}">
+                    <p>{{ page.summaryLess }}</p>
+                </div>
+            
+                {% if page.has_more %}
+                <div id="show2{{page.id}}" onclick="onShowClick({{page.id}})">
+                    <p><a>展开全文<i class="uk-icon-angle-double-right"></i></a></p>
+                </div>
+                <div id="hide1{{page.id}}" style="display:none">
+                    <p>{{page.summary}}</p>
+                </div>
+                <div id="hide2{{page.id}}" onclick="onHideClick({{page.id}})" style="display:none">
+                    <p><a>收起全文<i class="uk-icon-angle-double-right"></i></a></p>
+                </div>
+                {% endif %}
+            </article>
+            <hr class="uk-article-divider">
+        {% endfor %}
+        <ul class="uk-pagination">
+            {% if info.page_previous %}
+                <li><a href="/search/{{info.where}}/{{word}}/{{ info.page_previousId}}"><i class="uk-icon-angle-double-left"></i></a></li>
+                {% for pg in info.page_previous %}
+                    <li class="uk-active"><a href="/search/{{info.where}}/{{word}}/{{ pg }}">{{ pg }}</span></a></li>
+                {% endfor %}
+            {% else %}
+                <li class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>
+            {% endif %}
+            <li class="uk-active"><span>{{ info.page_index }}</span></li>
+            {% if info.page_next %}
+                {% for pg in info.page_next %}
+                    <li class="uk-active"><a href="/search/{{info.where}}/{{word}}/{{ pg }}">{{ pg }}</a></li>
+                {% endfor %}
+                <li><a href="/search/{{info.where}}/{{word}}/{{ info.page_nextId}}"><i class="uk-icon-angle-double-right"></i></a></li>
+            {% else %}
+                <li class="uk-disabled"><span><i class="uk-icon-angle-double-right"></i></span></li>
+            {% endif %}
+        </ul>
+    {% else %}
+        <article class="uk-article">
+            <h2><a href="#">您似乎想要搜索 {{word}} ? 但是我就不给你看呢,科科</a></h2>
+        </article>
+    {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
