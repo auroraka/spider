@@ -1,1 +1,2 @@
-基于Python的Django web框架编写的食物搜索引擎，涉及网络爬虫，网站编写和搭建的知识，同时可通过访问ytldone.tk
+基于Python的Django web框架编写的食物搜索引擎
+涉及网络爬虫，网站编写和搭建的知识

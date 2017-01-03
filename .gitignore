@@ -1,1 +1,3 @@
 /spider/resource/*
+*.pyc
+.DS_Store

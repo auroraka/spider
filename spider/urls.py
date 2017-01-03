@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 
 urlpatterns = [
+	url(r'^test','keke.views.test',name='test'),
 	url(r'^notfound','keke.views.notfound',name='notfound'),
 	url(r'^base','keke.views.base',name='base'),
 	url(r'^login','keke.views.login',name='login'),

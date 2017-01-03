@@ -6,7 +6,14 @@ from django.http import HttpResponseRedirect
 from spider.load import packages
 from spider.load import myindex
 
+def test(request):
+	print '!!!',request,'###\n'
+	return render(request,'test.html')
+
 def index(request):
+	if (request.method=='POST'):
+		print request.POST
+		return HttpResponse('aaaa')
 	return HttpResponseRedirect('/search')
 	#return render(request,'home.html')
 
